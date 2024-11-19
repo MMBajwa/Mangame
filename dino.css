@@ -21,7 +21,7 @@ background-size: contain;
 }
 
     .modal{
-        display: flex; /* Hidden by default */
+        display: flex; 
         position: fixed;
         top: 0;
         left: 0;
