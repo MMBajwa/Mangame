@@ -45,12 +45,7 @@ window.onload = function() {
     board.height = boardHeight;
     board.width = boardWidth;
 
-    context = board.getContext("2d"); //used for drawing on the board
-
-    //draw initial dinosaur
-    // context.fillStyle="green";
-    // context.fillRect(dino.x, dino.y, dino.width, dino.height);
-
+    context = board.getContext("2d"); 
     dinoImg = new Image();
     dinoImg.src = "Untitled.png";
     dinoImg.onload = function() {
@@ -63,10 +58,8 @@ window.onload = function() {
     cactus2Img = new Image();
     cactus2Img.src = "cloakedman.png";
 
-   
-
     requestAnimationFrame(update);
-    setInterval(placeCactus, 1000); //1000 milliseconds = 1 second
+    setInterval(placeCactus, 1000); 
     document.addEventListener("keydown", moveDino);
 }
 
@@ -113,8 +106,9 @@ function moveDino(e) {
     }
     
     else if (e.code == "ArrowDown" && dino.y == dinoY) {
-        //duck
-    }
+ 
+   
+       }
 
 }
 
@@ -124,7 +118,6 @@ function placeCactus() {
         return;
     }
 
-    //place cactus
     let cactus = {
         img : null,
         x : cactusX,
@@ -152,30 +145,13 @@ function placeCactus() {
     }
 }
 
-
-// Modal elements
-const customMessage = document.getElementById("customMessage");
-const modalText = document.getElementById("modalText");
-const closeButton = document.getElementById("closeButton");
-
-// Show modal function
-function showModal(message) {
-    modalText.textContent = message; // Set the message text
-    customMessage.style.display = "flex"; // Show the modal
-}
-
-// Close modal
-closeButton.addEventListener("click", () => {
-    customMessage.style.display = "none"; // Hide the modal
-});
-
-// Update collision logic to use the modal
-function detectCollision(a, b) {
+function detectCollision(a, b)
+ {
     const isColliding =
-        a.x < b.x + b.width &&    // a's top left corner doesn't reach b's top right corner
-        a.x + a.width > b.x &&    // a's top right corner passes b's top left corner
-        a.y < b.y + b.height &&   // a's top left corner doesn't reach b's bottom left corner
-        a.y + a.height > b.y;     // a's bottom left corner passes b's top left corner
+        a.x < b.x + b.width &&   
+        a.x + a.width > b.x &&   
+        a.y < b.y + b.height &&   
+        a.y + a.height > b.y;    
 
     if (isColliding) {
         console.log("This is a warning stay away from threats and be a safe cyber citizen too!");
