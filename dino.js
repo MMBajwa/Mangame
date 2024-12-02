@@ -104,17 +104,14 @@ function moveDino(e) {
     if ((e.code == "Space" || e.code == "ArrowUp") && Math.abs(dino.y - dinoY) < 1) {
         velocityY = -10; // jump
 
-        if (e.type === "touchstart" && Math.abs(dino.y - dinoY) < 1) {
-            velocityY = -10; // jump
+     if (e.type === "touchstart" && Math.abs(dino.y - dinoY) < 1) {
+            velocityY = -10; 
         }
-        
-    if (e.code == "ArrowDown" && dino.y == dinoY) {
- 
-   
-       }
        
     }
+
 }
+document.addEventListener("touchstart", moveDino);
     
     function placeCactus() {
         if (gameOver) {
