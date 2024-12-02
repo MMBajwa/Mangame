@@ -101,9 +101,13 @@ function moveDino(e) {
         return;
     }
     
-    if ((e.code == "Space" || e.code == "ArrowUp"||e.code == "touchstart") && Math.abs(dino.y - dinoY) < 1) {
+    if ((e.code == "Space" || e.code == "ArrowUp") && Math.abs(dino.y - dinoY) < 1) {
         velocityY = -10; // jump
 
+        if (e.type === "touchstart" && Math.abs(dino.y - dinoY) < 1) {
+            velocityY = -10; // jump
+        }
+        
     if (e.code == "ArrowDown" && dino.y == dinoY) {
  
    
