@@ -69,17 +69,17 @@ function update() {
         return;
     }
     context.clearRect(0, 0, board.width, board.height);
-
+    
     velocityY += gravity;
     dino.y = Math.min(dino.y + velocityY, dinoY); //apply gravity to current dino.y, making sure it doesn't exceed the ground
     context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
-
+    
     //cactus
     for (let i = 0; i < cactusArray.length; i++) {
         let cactus = cactusArray[i];
         cactus.x += velocityX;
         context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
-
+        
         if (detectCollision(dino, cactus)) {
             gameOver = true;
             dinoImg.src = "./img/dino-dead.png";
@@ -100,7 +100,7 @@ function moveDino(e) {
     if (gameOver) {
         return;
     }
-
+    
     if ((e.code == "Space" || e.code == "ArrowUp") && Math.abs(dino.y - dinoY) < 1) {
         velocityY = -10; // jump
     }
@@ -109,12 +109,12 @@ function moveDino(e) {
  
    
        }
-
-}
-
-function placeCactus() {
-    if (gameOver) {
-        console.log("Gameover");
+       
+    }
+    
+    function placeCactus() {
+        if (gameOver) {
+            console.log("Gameover");
         return;
     }
 
@@ -139,24 +139,33 @@ function placeCactus() {
         cactus.width = virus1Width;
         cactusArray.push(cactus);
     }
-
+    
     if (cactusArray.length > 5) {
         cactusArray.shift(); //remove the first element from the array so that the array doesn't constantly grow
     }
 }
 
 function detectCollision(a, b)
- {
+{
     const isColliding =
         a.x < b.x + b.width &&   
         a.x + a.width > b.x &&   
         a.y < b.y + b.height &&   
         a.y + a.height > b.y;    
-
-    if (isColliding) {
-        console.log("This is a warning stay away from threats and be a safe cyber citizen too!");
-        alert("This is a warning stay away from threats and be a safe cyber citizen too!");
-    }
-
+        
+        if (isColliding) {
+            const container = document.querySelector('.container'); // Select the container
+            container.textContent = " This was just a warning: stay away from threats and be a safe cyber citizen! ";
+            console.log("Collision detected!");
+            alert("You collided, stay away from threats and be safe!");
+        }
+  
+    
     return isColliding;
 }
+function reload(){
+
+location.reload()
+
+ }
+

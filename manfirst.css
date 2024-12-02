@@ -1,38 +1,40 @@
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+
+body{
+    background-color:rgb(219, 62, 62);
+}
+.main{
+    display: inline-block;
+    width: 100%;
     align-items: center;
-    height: 100vh;
-    background-color: #282c34;
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    overflow: hidden;
+    justify-content: center;
+    background-color: aqua;
 }
+.main h3{
 
-.container {
-    text-align: center;
+    display: inline;
+    
+
 }
+.container{
 
-.hello {
-    font-size: 3rem;
-    opacity: 0;
-    transform: scale(0.5);
-    animation: helloAnimation 3s alternate;
+background-color: antiquewhite;
+background-blend-mode: darken;
+width: 200px;
+height: 100px;
+display: flex;
+align-items: center;
+text-align: center;
+justify-content: center;
+
 }
+a{
 
-@keyframes helloAnimation {
-    0% {
-        opacity: 0;
-        transform: scale(0.5);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(1.5);
-    }
+    color: black;
+    text-decoration: none;
+
+}
+h3{
+    display: inline;
+    font: 100px;
+    margin: auto;
 }

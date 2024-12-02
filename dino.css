@@ -7,11 +7,11 @@ body {
 
 #board {
     background-color: rgb(255, 255, 255);
-    border-bottom: 1px solid black;
+    border-bottom: 6px solid rgb(0, 0, 0);
     border-radius: 20px;
     background-image: url("background.jpg");
     border-color: rgb(255, 131, 131);
-background-size: contain;
+    background-size: contain;
 }
 
 .first h1{
@@ -19,8 +19,66 @@ background-size: contain;
     position: relative;
     top: 220px;
 }
+.restart {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #fff;
+    margin-top: 6px;
+    background-color: rgb(195, 51, 51);
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); 
+} 
+.container{
+    background-color: rgb(195, 51, 51);
+    display: block;
+    width: 50%;
+    height: 40%;
+    margin: auto;
+    padding: 5px;
+    margin-top: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: larger;
 
+}   
+.credits {
+    display: block;
+    position: fixed;  
+    bottom: 0;        
+    right: 0;         
+    width: 40%;      
+    text-align: center;  
+    background-color: rgb(195, 51, 51);
+    color: rgb(12, 10, 10);     
+    padding: 10px 0;  
+    font-size: 16px; 
+}
 
-    
-   
+@media (min-width: 414px) and (max-width: 896px) {
+    body {
+        font-size: 14px; 
+        padding: 10px; 
+    }
+
+    #board {
+        width: 90%;
+        margin: 0 auto; 
+        border-radius: 15px;
+        background-size: cover; 
+    }
+
+    .first h1 {
+        font-size: 20px; 
+        top: 150px;
+    }
+    .restart{
+        padding: 5px 10px;
+    }
+    .container{
+        width: 30%;
+        height: 20%;
+    }
+}
+
 
