@@ -110,6 +110,7 @@ function moveDino(e) {
        }
        
     }
+}
     
     function placeCactus() {
         if (gameOver) {
