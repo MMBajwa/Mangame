@@ -165,4 +165,5 @@ function reload(){
 location.reload()
 
  }
+document.addEventListener("touchstart", moveDino);
 
