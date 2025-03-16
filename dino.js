@@ -1,4 +1,3 @@
-
 //board
 let board;
 let boardWidth = 750;
@@ -13,11 +12,11 @@ let dinoY = boardHeight - dinoHeight;
 let dinoImg;
 
 let dino = {
-    x : dinoX,
-    y : dinoY,
-    width : dinoWidth,
-    height : dinoHeight
-}
+    x: dinoX,
+    y: dinoY,
+    width: dinoWidth,
+    height: dinoHeight
+};
 
 //cactus
 let cactusArray = [];
@@ -35,22 +34,22 @@ let cactus2Img;
 //physics
 let velocityX = -7.5; //cactus moving left speed
 let velocityY = 0;
-let gravity = .5;
+let gravity = 0.5;
 
 let gameOver = false;
 let score = 0;
 
-window.onload = function() {
+window.onload = function () {
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
 
-    context = board.getContext("2d"); 
+    context = board.getContext("2d");
     dinoImg = new Image();
     dinoImg.src = "Untitled.png";
-    dinoImg.onload = function() {
+    dinoImg.onload = function () {
         context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
-    }
+    };
 
     cactus1Img = new Image();
     cactus1Img.src = "virus.png";
@@ -59,9 +58,12 @@ window.onload = function() {
     cactus2Img.src = "cloakedman.png";
 
     requestAnimationFrame(update);
-    setInterval(placeCactus, 1000); 
+    setInterval(placeCactus, 1000);
+
+    // Add event listeners for keyboard and touch
     document.addEventListener("keydown", moveDino);
-}
+    document.addEventListener("touchstart", handleTouch);
+};
 
 function update() {
     requestAnimationFrame(update);
@@ -69,29 +71,29 @@ function update() {
         return;
     }
     context.clearRect(0, 0, board.width, board.height);
-    
+
     velocityY += gravity;
     dino.y = Math.min(dino.y + velocityY, dinoY); //apply gravity to current dino.y, making sure it doesn't exceed the ground
     context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
-    
+
     //cactus
     for (let i = 0; i < cactusArray.length; i++) {
         let cactus = cactusArray[i];
         cactus.x += velocityX;
         context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
-        
+
         if (detectCollision(dino, cactus)) {
             gameOver = true;
             dinoImg.src = "./img/dino-dead.png";
-            dinoImg.onload = function() {
+            dinoImg.onload = function () {
                 context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
-            }
+            };
         }
     }
 
     //score
-    context.fillStyle="white";
-    context.font="20px courier";
+    context.fillStyle = "white";
+    context.font = "20px courier";
     score++;
     context.fillText(score, 5, 20);
 }
@@ -100,70 +102,74 @@ function moveDino(e) {
     if (gameOver) {
         return;
     }
-    
-    if ((e.code == "Space" || e.code == "ArrowUp") && Math.abs(dino.y - dinoY) < 1) {
-        velocityY = -10; // jump
 
-        if (e.type === "touchstart" && Math.abs(dino.y - dinoY) < 1) {
-            velocityY = -10; // jump
-        }
+    if ((e.code === "Space" || e.code === "ArrowUp") && Math.abs(dino.y - dinoY) < 1) {
+        velocityY = -10; // jump
     }
 }
-    function placeCactus() {
-        if (gameOver) {
-            console.log("Gameover");
+
+function handleTouch(e) {
+    if (gameOver) {
+        return;
+    }
+
+    // Prevent default touch behavior (e.g., scrolling)
+    e.preventDefault();
+
+    // Trigger jump if the dino is on the ground
+    if (Math.abs(dino.y - dinoY) < 1) {
+        velocityY = -10; // jump
+    }
+}
+
+function placeCactus() {
+    if (gameOver) {
+        console.log("Gameover");
         return;
     }
 
     let cactus = {
-        img : null,
-        x : cactusX,
-        y : cactusY,
-        width : null,
+        img: null,
+        x: cactusX,
+        y: cactusY,
+        width: null,
         height: cactusHeight
-    }
+    };
 
     let placeCactusChance = Math.random(); //0 - 0.9999...
 
-   
-     if (placeCactusChance > .70) { //30% you get cactus2
+    if (placeCactusChance > 0.7) { //30% you get cactus2
         cactus.img = cactus2Img;
         cactus.width = cactus2Width;
         cactusArray.push(cactus);
-    }
-    else if (placeCactusChance > .50) { //50% you get cactus1
+    } else if (placeCactusChance > 0.5) { //50% you get cactus1
         cactus.img = cactus1Img;
         cactus.width = virus1Width;
         cactusArray.push(cactus);
     }
-    
+
     if (cactusArray.length > 5) {
         cactusArray.shift(); //remove the first element from the array so that the array doesn't constantly grow
     }
 }
 
-function detectCollision(a, b)
-{
+function detectCollision(a, b) {
     const isColliding =
-        a.x < b.x + b.width &&   
-        a.x + a.width > b.x &&   
-        a.y < b.y + b.height &&   
-        a.y + a.height > b.y;    
-        
-        if (isColliding) {
-            const container = document.querySelector('.container'); // Select the container
-            container.textContent = " This was just a warning: stay away from threats and be a safe cyber citizen! ";
-            console.log("Collision detected!");
-            alert("You collided, stay away from threats and be safe!");
-        }
-  
-    
+        a.x < b.x + b.width &&
+        a.x + a.width > b.x &&
+        a.y < b.y + b.height &&
+        a.y + a.height > b.y;
+
+    if (isColliding) {
+        const container = document.querySelector('.container'); // Select the container
+        container.textContent = " This was just a warning: stay away from threats and be a safe cyber citizen! ";
+        console.log("Collision detected!");
+        alert("You collided, stay away from threats and be safe!");
+    }
+
     return isColliding;
 }
-function reload(){
 
-location.reload()
-
- }
-document.addEventListener("touchstart", moveDino);
-
+function reload() {
+    location.reload();
+}
